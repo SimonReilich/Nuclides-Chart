@@ -35,17 +35,26 @@
             npmDepsHash = "sha256-0dfC1Jy5ejy2Ahpl6C/P+ZGIWXteNyh9+aFW90JVrDU=";
 
             NG_CLI_ANALYTICS = "false";
-            npmBuildScript = "build -- --base-href /Nuclides-Chart/";
+
+            npmBuildScript = "build";
+
+            npmBuildFlags = [
+              "--"
+              "--base-href"
+              "/Nuclides-Chart/"
+            ];
 
             installPhase = ''
               mkdir -p $out/share/www
-              cp -r dist/nuclides-chart/browser/* $out/share/www/
+              # Note: Angular 17+ uses the /browser subfolder 
+              cp -r dist/${name}/browser/* $out/share/www/
+
+              # Add .nojekyll to ensure GitHub doesn't ignore files 
               touch $out/share/www/.nojekyll
 
               mkdir -p $out/bin
               cat <<EOF > $out/bin/${name}
               #!/bin/sh
-              echo "Starting server at http://localhost:8080"
               ${pkgs.python3}/bin/python3 -m http.server 8080 --directory $out/share/www
               EOF
               chmod +x $out/bin/${name}
