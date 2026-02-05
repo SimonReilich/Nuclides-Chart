@@ -35,11 +35,12 @@
             npmDepsHash = "sha256-0dfC1Jy5ejy2Ahpl6C/P+ZGIWXteNyh9+aFW90JVrDU=";
 
             NG_CLI_ANALYTICS = "false";
-            npmBuildScript = "build";
+            npmBuildScript = "build -- --base-href /Nuclides-Chart/";
 
             installPhase = ''
               mkdir -p $out/share/www
-              cp -r dist/${name}/browser/* $out/share/www/
+              cp -r dist/nuclides-chart/browser/* $out/share/www/
+              touch $out/share/www/.nojekyll
 
               mkdir -p $out/bin
               cat <<EOF > $out/bin/${name}
