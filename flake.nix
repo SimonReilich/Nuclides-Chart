@@ -29,23 +29,22 @@
           default = pkgs.buildNpmPackage {
             pname = name;
             version = version;
-            src = ./.;
 
-            npmDepsHash = "";
+            src = pkgs.lib.cleanSource ./.;
+
+            npmDepsHash = "sha256-0dfC1Jy5ejy2Ahpl6C/P+ZGIWXteNyh9+aFW90JVrDU=";
 
             NG_CLI_ANALYTICS = "false";
-
             npmBuildScript = "build";
+
             installPhase = ''
               mkdir -p $out/share/www
-
               cp -r dist/${name}/browser/* $out/share/www/
 
               mkdir -p $out/bin
               cat <<EOF > $out/bin/${name}
               #!/bin/sh
               echo "Starting server at http://localhost:8080"
-              # We serve the flattened www directory
               ${pkgs.python3}/bin/python3 -m http.server 8080 --directory $out/share/www
               EOF
               chmod +x $out/bin/${name}
@@ -67,7 +66,7 @@
             type = "app";
             program = "${self.packages.${system}.default}/bin/${name}";
             meta = {
-              # description = "description";
+              description = "visualization of nuclides and nuclear decay with data by https://www-nds.iaea.org/";
             };
           };
           dev = {
