@@ -1,5 +1,5 @@
 {
-  # description = "description";
+  description = "visualization of nuclides and nuclear decay with data by https://www-nds.iaea.org/";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -93,13 +93,6 @@
               nodePackages."@angular/cli"
               pkg-config
             ];
-
-            shellHook = ''
-              if [ ! -d ./frontend ]; then
-                # Create Angular Project on first Enter
-                ng new ${name} --directory ./
-              fi
-            '';
           };
         }
       );

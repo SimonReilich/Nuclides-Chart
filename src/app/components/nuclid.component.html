@@ -1,0 +1,20 @@
+@if (nuclid === undefined) {
+
+} @else {
+<div class="wrapper" [ngClass]="{
+    stable: nuclid.half_life === 'STABLE', 
+    alpha: nuclid.decay_1 != null && nuclid.decay_1.includes('A'),
+    beta_plus: nuclid.decay_1 != null && nuclid.decay_1.includes('B+'),
+    beta_minus: nuclid.decay_1 != null && nuclid.decay_1.includes('B-'),
+    e_capture: nuclid.decay_1 != null && nuclid.decay_1.includes('EC'),
+    fission: nuclid.decay_1 != null && nuclid.decay_1.includes('SF'),
+    proton: nuclid.decay_1 != null && nuclid.decay_1.includes('P'),
+    neutron: nuclid.decay_1 != null && nuclid.decay_1.includes('N'),
+    unknown: nuclid.decay_1 == null,
+}">
+<h1 class="symbol">{{ nuclid.symbol }}</h1>
+<p class="nuclid-number">{{ nuclid.z + nuclid.n }}</p>
+<p class="atomic-number">{{ nuclid.z }}</p>
+<p class="half-life" [hidden]="half_life_time() == null">tₕ: {{ half_life_time() }}</p>
+</div>
+}

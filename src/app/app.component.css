@@ -1,0 +1,16 @@
+.viewport {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.row {
+    position: relative;
+    height: 120px;
+    /* Should match itemSize in the viewport */
+}
+
+::ng-deep cdk-virtual-scroll-wrapper {
+  transform-style: preserve-3d;
+  z-index: 1;
+}

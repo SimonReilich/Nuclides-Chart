@@ -1,0 +1,88 @@
+.wrapper {
+    width: 120px;
+    height: 120px;
+    padding: 0;
+    margin: 0;
+    transition: box-shadow 0.25s, scale 0.5s;
+}
+
+.wrapper:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    scale: 1.2;
+    transform: translateZ(10px);
+    z-index: 99;
+}
+
+.symbol {
+    position: relative;
+    transform: translate(40%, 25%);
+    text-align: left;
+    width: 80px;
+}
+
+.nuclid-number {
+    position: relative;
+    transform: translate(-65%, -250%);
+    text-align: right;
+    width: 80px;
+}
+
+.atomic-number {
+    position: relative;
+    transform: translate(-65%, -330%);
+    text-align: right;
+    width: 80px;
+}
+
+.half-life {
+    z-index: 10;
+    position: relative;
+    transform: translate(10%, -380%);
+    text-align: left;
+    width: 120px;
+}
+
+.unknown {
+    background-color: #E1E1E1;
+    color: gray;
+}
+
+.e_capture {
+    background-color: #009A9A;
+    color: black;
+}
+
+.neutron {
+    background-color: #FF00FF;
+    color: black;
+}
+
+.proton {
+    background-color: #FF0000;
+    color: black;
+}
+
+.fission {
+    background-color: #00FF00;
+    color: black;
+}
+
+.beta_plus {
+    background-color: #FF9A00;
+    color: black;
+}
+
+.beta_minus {
+    background-color: #9A9AFF;
+    color: black;
+}
+
+.alpha {
+    background-color: #FFFF00;
+    color: black;
+}
+
+.stable {
+    background-color: black;
+    color: white;
+}
