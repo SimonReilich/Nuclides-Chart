@@ -22,5 +22,7 @@ jobs:
           nix build .
 
       - name: Deploying to Pages
-        run: |
-          gh-pages -d result/share/www
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: result/share/www
+          branch: gh-pages
