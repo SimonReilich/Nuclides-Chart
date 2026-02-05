@@ -1,0 +1,26 @@
+name: deploy nix angular
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/determinate-nix-action@v3
+
+      - name: Building application
+        run: |
+          nix build .
+
+      - name: Deploying to Pages
+        run: |
+          gh-pages -d result/share/www
