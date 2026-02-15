@@ -29,32 +29,22 @@
           default = pkgs.buildNpmPackage {
             pname = name;
             version = version;
+            src = ./.;
 
-            src = pkgs.lib.cleanSource ./.;
-
-            npmDepsHash = "sha256-0dfC1Jy5ejy2Ahpl6C/P+ZGIWXteNyh9+aFW90JVrDU=";
+            npmDepsHash = "sha256-OcBHjWPjYDLQqrrzlazUi5lyjYbJma+nck8ijp74JC0=";
 
             NG_CLI_ANALYTICS = "false";
 
             npmBuildScript = "build";
-
-            npmBuildFlags = [
-              "--"
-              "--base-href"
-              "/Nuclides-Chart/"
-            ];
-
+            
             installPhase = ''
               mkdir -p $out/share/www
-              # Note: Angular 17+ uses the /browser subfolder 
-              cp -r dist/${name}/browser/* $out/share/www/
-
-              # Add .nojekyll to ensure GitHub doesn't ignore files 
-              touch $out/share/www/.nojekyll
-
+              cp -r dist/${name}/browser/* $out/share/www
+              
               mkdir -p $out/bin
               cat <<EOF > $out/bin/${name}
               #!/bin/sh
+              echo "Starting server at http://localhost:8080"
               ${pkgs.python3}/bin/python3 -m http.server 8080 --directory $out/share/www
               EOF
               chmod +x $out/bin/${name}
@@ -76,7 +66,7 @@
             type = "app";
             program = "${self.packages.${system}.default}/bin/${name}";
             meta = {
-              description = "visualization of nuclides and nuclear decay with data by https://www-nds.iaea.org/";
+              # description = "description";
             };
           };
           dev = {
@@ -97,11 +87,14 @@
         {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
-              nodejs_20
+              nodejs_24
               nodePackages.npm
-              nodePackages."@angular/cli"
               pkg-config
             ];
+
+            shellHook = ''
+              export PATH=$PWD/node_modules/.bin:$PATH
+            '';
           };
         }
       );
