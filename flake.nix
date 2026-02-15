@@ -31,7 +31,7 @@
             version = version;
             src = ./.;
 
-            npmDepsHash = "sha256-OcBHjWPjYDLQqrrzlazUi5lyjYbJma+nck8ijp74JC0=";
+            npmDepsHash = "sha256-0dfC1Jy5ejy2Ahpl6C/P+ZGIWXteNyh9+aFW90JVrDU=";
 
             NG_CLI_ANALYTICS = "false";
 
